@@ -1,0 +1,53 @@
+<div id="container"  >
+    <ng-container *ngIf="isDone ; else isNotDone">
+        <div class="section-done">
+             <div *ngIf="this.point >= 5 ; else fail">
+                <img class="congratulation-img" src="../../../../assets/congratulation.jpg">
+                <h3>Congratulaion</h3>
+                <p>You are amazing!!!</p>
+                <p>{{point}} / {{data.length}} correct answer in {{this.minutes}} minutes {{this.seconds}} seconds</p>
+                <div class="footer">
+                    <button class="btn-replay" [routerLink]="['/home']">Play again</button>
+                </div>
+            </div>
+            <ng-template #fail>
+                <img src="../../../../assets/fail.png">
+                <h3>Completed!</h3>
+                <p>Better luck next time!</p>
+                <p>{{wrong}} / {{data.length}} incorrect answer in {{this.minutes}} minutes {{this.seconds}} seconds </p>
+                <div class="footer">
+                    <button class="btn-replay" [routerLink]="['/home']" >Play again</button>
+                </div>
+            </ng-template>
+        </div>
+    </ng-container>
+    <ng-template #isNotDone>
+        <div class="section">
+            <form>
+                <div class="header-section">
+                    <h3>Question {{currentQuestion + 1}} / {{data.length}} </h3>
+                    <h5><span id="time" class="text-primary">{{minutes}} : {{seconds}}</span></h5>
+                </div>
+                <h4>{{data[currentQuestion]?.question }}</h4>
+                <div class="answer-quiz" *ngFor="let option of options" >
+                    <label for="option">{{option}}</label>
+                    <input type="radio" (click)="onSelect(option)"  name="option_quiz">
+                </div>
+                <ng-container *ngIf="isAnswer ; else isAnswerFalse">
+                    <div class="true">
+                        {{content}}
+                    </div>
+                </ng-container>
+                <ng-template #isAnswerFalse>
+                    <div class="false">
+                        {{content}}
+                    </div>
+                </ng-template>
+                <div class="footer">
+                    <button class="btn-next" (click)="nextQuiz()">Next</button>
+                </div>
+            </form>
+        </div>
+    </ng-template> 
+   
+</div>
