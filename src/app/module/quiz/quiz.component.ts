@@ -40,7 +40,6 @@ export class QuizComponent implements OnInit {
   loadData(){
     this.dataService.getData().subscribe((res: any) => {
       this.data = res.results;
-      console.log('asd',res.results);
       this.getOption();
     })
   }
@@ -87,8 +86,6 @@ export class QuizComponent implements OnInit {
     this.data[this.currentQuestion].incorrect_answers.map((element: string) => {
       this.options.push(element);
     })
-    console.log('asd',this.options);
-    
     this.options.sort(() => Math.random() -0.5)
   }
 }
